@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/nav_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item_welcome"
+            android:title="@string/nav_title_welcome"
+            android:checked="true" />
+        <item
+            android:id="@+id/nav_item_game"
+            android:title="@string/nav_title_game" />
+        <item
+            android:id="@+id/nav_item_high_score"
+            android:title="@string/nav_title_high_score" />
+    </group>
+</menu>
