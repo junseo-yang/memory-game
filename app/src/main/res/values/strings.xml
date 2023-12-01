@@ -26,4 +26,50 @@
         \n4. You have 3 chances!</string>
     <string name="welcome_username_hint">Enter your username</string>
     <string name="welcome_go_button">Let\'s go!</string>
+
+    <!-- Game -->
+    <string name="game_title">Memory game</string>
+    <string name="game_start_button">Start</string>
+    <string name="game_tag_00">00</string>
+    <string name="game_tag_01">01</string>
+    <string name="game_tag_02">02</string>
+    <string name="game_tag_03">03</string>
+    <string name="game_tag_04">04</string>
+    <string name="game_tag_05">05</string>
+    <string name="game_tag_10">10</string>
+    <string name="game_tag_11">11</string>
+    <string name="game_tag_12">12</string>
+    <string name="game_tag_13">13</string>
+    <string name="game_tag_14">14</string>
+    <string name="game_tag_15">15</string>
+    <string name="game_tag_20">20</string>
+    <string name="game_tag_21">21</string>
+    <string name="game_tag_22">22</string>
+    <string name="game_tag_23">23</string>
+    <string name="game_tag_24">24</string>
+    <string name="game_tag_25">25</string>
+    <string name="game_tag_30">30</string>
+    <string name="game_tag_31">31</string>
+    <string name="game_tag_32">32</string>
+    <string name="game_tag_33">33</string>
+    <string name="game_tag_34">34</string>
+    <string name="game_tag_35">35</string>
+    <string name="game_tag_40">40</string>
+    <string name="game_tag_41">41</string>
+    <string name="game_tag_42">42</string>
+    <string name="game_tag_43">43</string>
+    <string name="game_tag_44">44</string>
+    <string name="game_tag_45">45</string>
+    <string name="game_tag_50">50</string>
+    <string name="game_tag_51">51</string>
+    <string name="game_tag_52">52</string>
+    <string name="game_tag_53">53</string>
+    <string name="game_tag_54">54</string>
+    <string name="game_tag_55">55</string>
+    <string name="game_life_title">Life</string>
+    <string name="game_life">3</string>
+    <string name="game_score_title">Score</string>
+    <string name="game_score">0</string>
+    <string name="game_timer_title">Timer</string>
+    <string name="game_timer">5</string>
 </resources>

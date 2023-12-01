@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,10 +9,347 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
+            android:id="@+id/gameLifeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Game"
-            android:layout_centerInParent="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10sp"
+            android:layout_marginLeft="10sp"
+            android:text="@string/placeholder" />
+
+        <TextView
+            android:id="@+id/gameLife"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/gameLifeTitle"
+            android:layout_marginTop="5sp"
+            android:layout_marginLeft="10sp"
+            android:text="@string/placeholder" />
+
+        <TextView
+            android:id="@+id/gameScoreTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10sp"
+            android:text="@string/placeholder" />
+
+        <TextView
+            android:id="@+id/gameScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/gameScoreTitle"
+            android:layout_marginTop="5sp"
+            android:text="@string/placeholder" />
+
+        <TextView
+            android:id="@+id/gameTimerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10sp"
+            android:layout_marginRight="10sp"
+            android:text="@string/placeholder" />
+
+        <TextView
+            android:id="@+id/gameTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/gameTimerTitle"
+            android:layout_marginTop="5sp"
+            android:layout_marginRight="10sp"
+            android:text="@string/placeholder" />
+
+        <TextView
+            android:id="@+id/gameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100sp"
+            android:text="@string/placeholder"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/gameStartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gameTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50sp"
+            android:text="@string/placeholder" />
+
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="6"
+            android:rowCount="6"
+            android:layout_below="@+id/gameStartButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50sp">
+
+            <!-- 0 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn00"
+                style="@style/grid"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:tag="@string/game_tag_00" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn01"
+                style="@style/grid"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:tag="@string/game_tag_01" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn02"
+                style="@style/grid"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:tag="@string/game_tag_02" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn03"
+                style="@style/grid"
+                android:layout_row="0"
+                android:layout_column="3"
+                android:tag="@string/game_tag_03" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn04"
+                style="@style/grid"
+                android:layout_row="0"
+                android:layout_column="4"
+                android:tag="@string/game_tag_04" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn05"
+                style="@style/grid"
+                android:layout_row="0"
+                android:layout_column="5"
+                android:tag="@string/game_tag_05" />
+
+            <!-- 1 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn10"
+                style="@style/grid"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:tag="@string/game_tag_10" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn11"
+                style="@style/grid"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:tag="@string/game_tag_11" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn12"
+                style="@style/grid"
+                android:layout_row="1"
+                android:layout_column="2"
+                android:tag="@string/game_tag_12" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn13"
+                style="@style/grid"
+                android:layout_row="1"
+                android:layout_column="3"
+                android:tag="@string/game_tag_13" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn14"
+                style="@style/grid"
+                android:layout_row="1"
+                android:layout_column="4"
+                android:tag="@string/game_tag_14" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn15"
+                style="@style/grid"
+                android:layout_row="1"
+                android:layout_column="5"
+                android:tag="@string/game_tag_15" />
+
+            <!-- 2 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn20"
+                style="@style/grid"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:tag="@string/game_tag_20" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn21"
+                style="@style/grid"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:tag="@string/game_tag_21" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn22"
+                style="@style/grid"
+                android:layout_row="2"
+                android:layout_column="2"
+                android:tag="@string/game_tag_22" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn23"
+                style="@style/grid"
+                android:layout_row="2"
+                android:layout_column="3"
+                android:tag="@string/game_tag_23" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn24"
+                style="@style/grid"
+                android:layout_row="2"
+                android:layout_column="4"
+                android:tag="@string/game_tag_24" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn25"
+                style="@style/grid"
+                android:layout_row="2"
+                android:layout_column="5"
+                android:tag="@string/game_tag_25" />
+
+            <!-- 3 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn30"
+                style="@style/grid"
+                android:layout_row="3"
+                android:layout_column="0"
+                android:tag="@string/game_tag_30" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn31"
+                style="@style/grid"
+                android:layout_row="3"
+                android:layout_column="1"
+                android:tag="@string/game_tag_31" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn32"
+                style="@style/grid"
+                android:layout_row="3"
+                android:layout_column="2"
+                android:tag="@string/game_tag_32" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn33"
+                style="@style/grid"
+                android:layout_row="3"
+                android:layout_column="3"
+                android:tag="@string/game_tag_33" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn34"
+                style="@style/grid"
+                android:layout_row="3"
+                android:layout_column="4"
+                android:tag="@string/game_tag_34" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn35"
+                style="@style/grid"
+                android:layout_row="3"
+                android:layout_column="5"
+                android:tag="@string/game_tag_35" />
+
+            <!-- 4 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn40"
+                style="@style/grid"
+                android:layout_row="4"
+                android:layout_column="0"
+                android:tag="@string/game_tag_40" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn41"
+                style="@style/grid"
+                android:layout_row="4"
+                android:layout_column="1"
+                android:tag="@string/game_tag_41" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn42"
+                style="@style/grid"
+                android:layout_row="4"
+                android:layout_column="2"
+                android:tag="@string/game_tag_42" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn43"
+                style="@style/grid"
+                android:layout_row="4"
+                android:layout_column="3"
+                android:tag="@string/game_tag_43" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn44"
+                style="@style/grid"
+                android:layout_row="4"
+                android:layout_column="4"
+                android:tag="@string/game_tag_44" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn45"
+                style="@style/grid"
+                android:layout_row="4"
+                android:layout_column="5"
+                android:tag="@string/game_tag_45" />
+
+            <!-- 5 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn50"
+                style="@style/grid"
+                android:layout_row="5"
+                android:layout_column="0"
+                android:tag="@string/game_tag_50" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn51"
+                style="@style/grid"
+                android:layout_row="5"
+                android:layout_column="1"
+                android:tag="@string/game_tag_51" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn52"
+                style="@style/grid"
+                android:layout_row="5"
+                android:layout_column="2"
+                android:tag="@string/game_tag_52" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn53"
+                style="@style/grid"
+                android:layout_row="5"
+                android:layout_column="3"
+                android:tag="@string/game_tag_53" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn54"
+                style="@style/grid"
+                android:layout_row="5"
+                android:layout_column="4"
+                android:tag="@string/game_tag_54" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn55"
+                style="@style/grid"
+                android:layout_row="5"
+                android:layout_column="5"
+                android:tag="@string/game_tag_55" />
+        </GridLayout>
     </RelativeLayout>
 </FrameLayout>

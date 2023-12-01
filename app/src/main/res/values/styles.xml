@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="grid">
+        <item name="android:layout_width">50sp</item>
+        <item name="android:layout_height">50sp</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:contentDescription">NULL</item>
+        <item name="cornerRadius">1sp</item>
+        <item name="strokeColor">@color/black</item>
+        <item name="strokeWidth">2sp</item>
+    </style>
+</resources>
