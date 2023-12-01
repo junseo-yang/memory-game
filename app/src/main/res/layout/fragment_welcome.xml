@@ -9,10 +9,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            android:id="@+id/welcomeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome"
-            android:layout_centerInParent="true" />
+            android:text="@string/placeholder"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100sp" />
+        <TextView
+            android:id="@+id/welcomeInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:textSize="14sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/welcomeTitle"
+            android:layout_marginTop="50sp" />
+        <EditText
+            android:id="@+id/welcomeUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/placeholder"
+            android:textSize="14sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/welcomeInstruction"
+            android:layout_marginTop="50sp" />
+        <Button
+            android:id="@+id/welcomePlayButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/welcomeUsername"
+            android:layout_marginTop="50sp"/>
     </RelativeLayout>
 
 </FrameLayout>

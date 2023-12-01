@@ -12,4 +12,18 @@
 
     <!-- Errors -->
     <string name="error_invalid_selection">Invalid Selection</string>
+
+    <!-- Place Holder -->
+    <string name="placeholder">Placeholder</string>
+
+
+    <!-- Welcome -->
+    <string name="welcome_title">Memory game</string>
+    <string name="welcome_instruction">How to play
+        \n1. Enter your name to record high score!
+        \n2. Highlight tiles before time\'s up!
+        \n3. If the tiles matched, you\'ll earn points!
+        \n4. You have 3 chances!</string>
+    <string name="welcome_username_hint">Enter your username</string>
+    <string name="welcome_go_button">Let\'s go!</string>
 </resources>
