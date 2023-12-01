@@ -16,4 +16,10 @@ class GameModel {
     var gameTimerTitle = ""
 
     var gameTimer = 0
+
+    var gameTileCount = 4
+
+    var gameQuestion = ""
+
+    var gameAnswer = ""
 }

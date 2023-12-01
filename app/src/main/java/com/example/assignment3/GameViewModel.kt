@@ -68,4 +68,28 @@ class GameViewModel : ViewModel() {
     fun getGameTimer(): Int {
         return gameModel.gameTimer
     }
+
+    fun setGameTileCount(count: Int) {
+        gameModel.gameTileCount = count
+    }
+
+    fun getGameTileCount(): Int {
+        return gameModel.gameTileCount
+    }
+
+    fun setGameQuestion(question: String) {
+        gameModel.gameQuestion = question
+    }
+
+    fun getGameQuestion(): String {
+        return gameModel.gameQuestion
+    }
+
+    fun setGameAnswer(answer: String) {
+        gameModel.gameAnswer = answer
+    }
+
+    fun getGameAnswer(): String {
+        return gameModel.gameAnswer
+    }
 }
