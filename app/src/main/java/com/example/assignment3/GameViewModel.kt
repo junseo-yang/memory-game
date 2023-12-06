@@ -119,8 +119,11 @@ class GameViewModel : ViewModel() {
         grid.isEnabled = false
     }
 
-    fun setTimer(view: View?) {
-        var gameTimer: TextView = view!!.findViewById(R.id.gameTimer)
+    fun setTimer(
+        context: Context?,
+        entireView: View?
+    ) {
+        var gameTimer: TextView = entireView!!.findViewById(R.id.gameTimer)
 
         gameModel.timer = object : CountDownTimer(5000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -129,7 +132,7 @@ class GameViewModel : ViewModel() {
             }
 
             override fun onFinish() {
-//                lose()
+                lose(context, entireView)
             }
         }
     }
@@ -138,8 +141,11 @@ class GameViewModel : ViewModel() {
         return gameModel.timer
     }
 
-    fun win(context: Context?, view: View?) {
-        var gameScore: TextView? = view?.findViewById(R.id.gameScore)
+    fun win(
+        context: Context?,
+        entireView: View?
+    ) {
+        var gameScore: TextView? = entireView?.findViewById(R.id.gameScore)
         Toast.makeText(context, "You got it!", Toast.LENGTH_SHORT).show()
         getTimer()?.cancel()
         setGameScore(getGameScore() + 10)
@@ -148,8 +154,11 @@ class GameViewModel : ViewModel() {
         getGameGrids()?.forEach { disableGameGrid(it) }
     }
 
-    fun lose(context: Context?, view: View?) {
-        var gameLife: TextView? = view?.findViewById(R.id.gameLife)
+    fun lose(
+        context: Context?,
+        entireView: View?
+    ) {
+        var gameLife: TextView? = entireView?.findViewById(R.id.gameLife)
         Toast.makeText(context , "Not quite!", Toast.LENGTH_SHORT).show()
         getTimer()?.cancel()
         setGameLife(getGameLife() - 1)
@@ -158,12 +167,16 @@ class GameViewModel : ViewModel() {
         getGameGrids()?.forEach { disableGameGrid(it) }
     }
 
-    fun startGame(lifecycleScope: LifecycleCoroutineScope, view: View?) {
-        var gameTimer: TextView = view!!.findViewById(R.id.gameTimer)
+    fun startGame(
+        lifecycleScope: LifecycleCoroutineScope,
+        context: Context?,
+        entireView: View?
+    ) {
+        var gameTimer: TextView = entireView!!.findViewById(R.id.gameTimer)
 
         lifecycleScope.launch {
             // Set Timer
-            setTimer(view)
+            setTimer(context, entireView)
 
             while (getGameLife() > 0) {
                 // Disable Grids
@@ -195,6 +208,34 @@ class GameViewModel : ViewModel() {
 
                 delay(5100)
             }
+        }
+    }
+
+    fun onClickGrid(
+        lifecycleScope: LifecycleCoroutineScope,
+        context: Context?,
+        view: View,
+        entireView: View?
+    ) {
+        lifecycleScope.launch {
+            view.setBackgroundColor(Color.BLACK)
+
+            view.let {
+                setGameAnswer(getGameAnswer() + it.tag)
+
+                if (getGameQuestion() == getGameAnswer())
+                {
+                    win(context, entireView)
+                }
+                else if (getGameAnswer().length >= getGameQuestion().length)
+                {
+                    lose(context, entireView)
+                }
+            }
+
+            delay(200)
+
+            view.setBackgroundColor(Color.WHITE)
         }
     }
 }
