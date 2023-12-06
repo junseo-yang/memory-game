@@ -1,6 +1,6 @@
 package com.example.assignment3
 
-import android.widget.GridLayout
+import android.os.CountDownTimer
 import com.google.android.material.button.MaterialButton
 
 class GameModel {
@@ -27,4 +27,6 @@ class GameModel {
     var gameAnswer = ""
 
     var gameGrids = mutableListOf<MaterialButton>()
+
+    var timer: CountDownTimer? = null
 }

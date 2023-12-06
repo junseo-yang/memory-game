@@ -45,7 +45,7 @@ class GameFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        viewModel = ViewModelProvider(this)[GameViewModel::class.java]
 
         // Data Binding for gameLifeTitle
         viewModel.setGameLifeTitle(getString(R.string.game_life_title))
@@ -89,7 +89,7 @@ class GameFragment : Fragment() {
 
         // SetOnClickListener on gameStartButton
         gameStartButton?.setOnClickListener {
-            startGame()
+            viewModel.startGame(lifecycleScope, view)
         }
 
         // Get GridLayout
@@ -120,11 +120,11 @@ class GameFragment : Fragment() {
 
                 if (viewModel.getGameQuestion() == viewModel.getGameAnswer())
                 {
-                    win()
+                    viewModel.win(context, getView())
                 }
                 else if (viewModel.getGameAnswer().length >= viewModel.getGameQuestion().length)
                 {
-                    lose()
+                    viewModel.lose(context, getView())
                 }
             }
 
@@ -132,68 +132,5 @@ class GameFragment : Fragment() {
 
             view.setBackgroundColor(Color.WHITE)
         }
-    }
-
-    private fun startGame()
-    {
-        lifecycleScope.launch {
-            timer = object: CountDownTimer(5000, 1000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    viewModel.setGameTimer(viewModel.getGameTimer() - 1)
-                    gameTimer?.text = viewModel.getGameTimer().toString()
-                }
-
-                override fun onFinish() {
-                    lose()
-                }
-            }
-            while (viewModel.getGameLife() > 0) {
-                // Disable Grids
-                viewModel.getGameGrids()?.forEach { viewModel.disableGameGrid(it) }
-
-                // Reset Timer
-                viewModel.setGameTimer(5)
-                gameTimer?.text = viewModel.getGameTimer().toString()
-
-                // Generate Random Question
-                var question = ""
-                for (i in 1..viewModel.getGameTileCount()) {
-                    var grid = viewModel.getGameGrids()?.random()
-                    question += grid?.tag
-                    grid?.setBackgroundColor(Color.BLACK)
-                    delay(1000)
-                    grid?.setBackgroundColor(Color.WHITE)
-                }
-                viewModel.setGameQuestion(question)
-
-                // Enable Buttons
-                viewModel.getGameGrids()?.forEach { viewModel.enableGameGrid(it) }
-
-                // Let user to play
-                viewModel.setGameTimer(5)
-                gameTimer?.text = viewModel.getGameTimer().toString()
-
-                (timer as CountDownTimer).start()
-
-                delay(5100)
-            }
-        }
-    }
-
-    private fun win() {
-        Toast.makeText(context , "You got it!", Toast.LENGTH_SHORT).show()
-        timer?.cancel()
-        viewModel.setGameScore(viewModel.getGameScore() + 10)
-        gameScore?.text = viewModel.getGameScore().toString()
-        viewModel.setGameAnswer("")
-        viewModel.getGameGrids()?.forEach { viewModel.disableGameGrid(it) }
-    }
-    private fun lose() {
-        Toast.makeText(context , "Not quite!", Toast.LENGTH_SHORT).show()
-        timer?.cancel()
-        viewModel.setGameLife(viewModel.getGameLife() - 1)
-        gameLife?.text = viewModel.getGameLife().toString()
-        viewModel.setGameAnswer("")
-        viewModel.getGameGrids()?.forEach { viewModel.disableGameGrid(it) }
     }
 }
