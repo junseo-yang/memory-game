@@ -25,7 +25,6 @@ class GameFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
 
     // Global Variables
-    private var grids = mutableListOf<MaterialButton>()
     private var gameLifeTitle: TextView? = null
     private var gameLife: TextView? = null
     private var gameScoreTitle: TextView? = null
@@ -96,23 +95,20 @@ class GameFragment : Fragment() {
         // Get GridLayout
         gridLayout = view?.findViewById(R.id.gridLayout)
 
-        // Get gridCount
-        val gridCount: Int? = gridLayout?.childCount
-
         // Create List of Buttons
-        for (i in 0 until gridCount!!) {
-            grids.add(gridLayout?.getChildAt(i) as MaterialButton)
+        for (i in 0 until gridLayout?.childCount!!) {
+            viewModel.addGameGrid(gridLayout?.getChildAt(i) as MaterialButton)
         }
 
         // SetOnClickListener for each grid
-        for (grid in grids) {
+        for (grid in viewModel.getGameGrids()!!) {
             grid.setOnClickListener {
                 onClickGrid(it)
             }
         }
 
         // Disable Buttons for Initialization
-        disableButtons()
+        viewModel.getGameGrids()?.forEach { viewModel.disableGameGrid(it) }
     }
 
     private fun onClickGrid(view: View) {
@@ -138,21 +134,6 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun enableButtons()
-    {
-        grids.forEach {
-            it.isEnabled = true
-            it.setBackgroundColor(Color.WHITE)
-        }
-    }
-
-    private fun disableButtons()
-    {
-        grids.forEach {
-            it.isEnabled = false
-        }
-    }
-
     private fun startGame()
     {
         lifecycleScope.launch {
@@ -167,8 +148,8 @@ class GameFragment : Fragment() {
                 }
             }
             while (viewModel.getGameLife() > 0) {
-                // Disable Buttons
-                disableButtons()
+                // Disable Grids
+                viewModel.getGameGrids()?.forEach { viewModel.disableGameGrid(it) }
 
                 // Reset Timer
                 viewModel.setGameTimer(5)
@@ -177,16 +158,16 @@ class GameFragment : Fragment() {
                 // Generate Random Question
                 var question = ""
                 for (i in 1..viewModel.getGameTileCount()) {
-                    var grid = grids.random()
-                    question += grid.tag
-                    grid.setBackgroundColor(Color.BLACK)
+                    var grid = viewModel.getGameGrids()?.random()
+                    question += grid?.tag
+                    grid?.setBackgroundColor(Color.BLACK)
                     delay(1000)
-                    grid.setBackgroundColor(Color.WHITE)
+                    grid?.setBackgroundColor(Color.WHITE)
                 }
                 viewModel.setGameQuestion(question)
 
                 // Enable Buttons
-                enableButtons()
+                viewModel.getGameGrids()?.forEach { viewModel.enableGameGrid(it) }
 
                 // Let user to play
                 viewModel.setGameTimer(5)
@@ -205,7 +186,7 @@ class GameFragment : Fragment() {
         viewModel.setGameScore(viewModel.getGameScore() + 10)
         gameScore?.text = viewModel.getGameScore().toString()
         viewModel.setGameAnswer("")
-        disableButtons()
+        viewModel.getGameGrids()?.forEach { viewModel.disableGameGrid(it) }
     }
     private fun lose() {
         Toast.makeText(context , "Not quite!", Toast.LENGTH_SHORT).show()
@@ -213,6 +194,6 @@ class GameFragment : Fragment() {
         viewModel.setGameLife(viewModel.getGameLife() - 1)
         gameLife?.text = viewModel.getGameLife().toString()
         viewModel.setGameAnswer("")
-        disableButtons()
+        viewModel.getGameGrids()?.forEach { viewModel.disableGameGrid(it) }
     }
 }

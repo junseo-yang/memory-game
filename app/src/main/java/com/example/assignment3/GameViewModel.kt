@@ -1,6 +1,11 @@
 package com.example.assignment3
 
+import android.graphics.Color
+import android.view.View
 import androidx.lifecycle.ViewModel
+import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class GameViewModel : ViewModel() {
     private var gameModel: GameModel = GameModel()
@@ -91,5 +96,25 @@ class GameViewModel : ViewModel() {
 
     fun getGameAnswer(): String {
         return gameModel.gameAnswer
+    }
+
+    fun addGameGrid(grid: MaterialButton) {
+        gameModel.gameGrids.add(grid)
+    }
+
+    fun getGameGrids(): List<MaterialButton>? {
+        return gameModel.gameGrids
+    }
+
+    fun enableGameGrid(grid: MaterialButton) {
+        grid.isEnabled = true
+    }
+
+    fun disableGameGrid(grid: MaterialButton) {
+        grid.isEnabled = false
+    }
+
+    fun startGame() {
+        
     }
 }

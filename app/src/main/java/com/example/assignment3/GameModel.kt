@@ -1,5 +1,8 @@
 package com.example.assignment3
 
+import android.widget.GridLayout
+import com.google.android.material.button.MaterialButton
+
 class GameModel {
     var title = ""
 
@@ -22,4 +25,6 @@ class GameModel {
     var gameQuestion = ""
 
     var gameAnswer = ""
+
+    var gameGrids = mutableListOf<MaterialButton>()
 }
