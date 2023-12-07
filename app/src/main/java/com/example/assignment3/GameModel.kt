@@ -14,11 +14,14 @@ class GameModel {
     var gameLifeTitle = ""
     var gameLife = 3
     var gameLifeInitial = 3
+    var gameLifeInterval = 1
 
     // Game Score
     var gameScoreTitle = ""
     var gameScore = 0
     var gameScoreInitial = 0
+    var gameScoreInterval: Int = 10
+        get() = (this.gameRound / 3 + 1) * 10
 
     // Game Timer
     var gameTimerTitle = ""
@@ -38,10 +41,12 @@ class GameModel {
     var gameAnswerInitial = ""
 
     // Game Round
-    var gameRound = 1
-    var gameRoundInitial = 1
+    var gameRound = 0
+    var gameRoundInitial = 0
+    var gameRoundInterval = 1
 
     var gameGrids = mutableListOf<MaterialButton>()
 
+    // Timer
     var timer: CountDownTimer? = null
 }

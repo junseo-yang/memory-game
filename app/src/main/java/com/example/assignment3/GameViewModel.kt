@@ -3,6 +3,7 @@ package com.example.assignment3
 import android.content.Context
 import android.graphics.Color
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.GridLayout
@@ -16,10 +17,14 @@ import kotlinx.coroutines.launch
 
 class GameViewModel : ViewModel() {
     private val ZERO = 0
-    private val DELAY_INITIAL:Long = 1000
+    private val DELAY_INITIAL: Long = 1000
+    private val DELAY_BUTTON_CLICK: Long = 100
+    private val TIMER_INTERVAL: Long = 1000
+    private val TIMER_START_AT: Long = 5000
     private var gamePlaying = true
     private var gameModel: GameModel = GameModel()
 
+    // Title
     fun setTitle(title: String) {
         gameModel.title = title
     }
@@ -28,6 +33,7 @@ class GameViewModel : ViewModel() {
         return gameModel.title
     }
 
+    // Start Button
     fun setStartButtonText(btnStartText: String) {
         gameModel.btnStartText = btnStartText
     }
@@ -36,6 +42,7 @@ class GameViewModel : ViewModel() {
         return gameModel.btnStartText
     }
 
+    // Quit Button
     fun setQuitButtonText(btnQuitText: String) {
         gameModel.btnQuitText = btnQuitText
     }
@@ -44,6 +51,7 @@ class GameViewModel : ViewModel() {
         return gameModel.btnQuitText
     }
 
+    // Game Life
     fun setGameLifeTitle(title: String) {
         gameModel.gameLifeTitle = title
     }
@@ -64,6 +72,10 @@ class GameViewModel : ViewModel() {
         return gameModel.gameLifeInitial
     }
 
+    fun getGameLifeInterval(): Int {
+        return gameModel.gameLifeInterval
+    }
+
     fun setGameScoreTitle(title: String) {
         gameModel.gameScoreTitle = title
     }
@@ -82,6 +94,10 @@ class GameViewModel : ViewModel() {
 
     fun getGameScoreInitial(): Int {
         return gameModel.gameScoreInitial
+    }
+
+    fun getGameScoreInterval(): Int {
+        return gameModel.gameScoreInterval
     }
 
     fun setGameTimerTitle(title: String) {
@@ -142,6 +158,7 @@ class GameViewModel : ViewModel() {
         return gameModel.gameAnswerInitial
     }
 
+    // Game Round
     fun setGameRound(round: Int) {
         gameModel.gameRound = round
     }
@@ -154,6 +171,11 @@ class GameViewModel : ViewModel() {
         return gameModel.gameRoundInitial
     }
 
+    fun getGameRoundInterval(): Int {
+        return gameModel.gameRoundInterval
+    }
+
+    // Game Grid
     fun addGameGrid(grid: MaterialButton) {
         gameModel.gameGrids.add(grid)
     }
@@ -177,7 +199,7 @@ class GameViewModel : ViewModel() {
         var gameTimer: TextView = entireView!!.findViewById(R.id.gameTimer)
         setGameTimer(getGameTimerInitial())
 
-        gameModel.timer = object : CountDownTimer(5000, 1000) {
+        gameModel.timer = object : CountDownTimer(TIMER_START_AT, TIMER_INTERVAL) {
 
             override fun onTick(millisUntilFinished: Long) {
                 setGameTimer(getGameTimer() - 1)
@@ -199,16 +221,29 @@ class GameViewModel : ViewModel() {
         entireView: View?
     ) {
         var gameScore: TextView? = entireView?.findViewById(R.id.gameScore)
+
+        // Disable Button
+        getGameGrids()?.forEach { disableGameGrid(it) }
+
+        // Toast win message
         Toast.makeText(
             context,
             context?.getString(R.string.game_win_message),
             Toast.LENGTH_SHORT
         ).show()
+
+        // Cancel Timer
         getTimer()?.cancel()
-        setGameScore(getGameScore() + 10)
+
+        // Increase Game Score
+        setGameScore(getGameScore() + getGameScoreInterval())
         gameScore?.text = getGameScore().toString()
-        setGameAnswer("")
-        getGameGrids()?.forEach { disableGameGrid(it) }
+
+        // Increase Game Round
+        setGameRound(getGameRound() + getGameRoundInterval())
+
+        // Reset Game Answer
+        setGameAnswer(getGameAnswerInitial())
     }
 
     fun lose(
@@ -216,16 +251,26 @@ class GameViewModel : ViewModel() {
         entireView: View?
     ) {
         var gameLife: TextView? = entireView?.findViewById(R.id.gameLife)
+
+        // Disable Button
+        getGameGrids()?.forEach { disableGameGrid(it) }
+
+        // Toast lose message
         Toast.makeText(
             context,
             context?.getString(R.string.game_lose_message),
             Toast.LENGTH_SHORT
         ).show()
+
+        // Cancel Timer
         getTimer()?.cancel()
-        setGameLife(getGameLife() - 1)
+
+        // Decrease Game Life
+        setGameLife(getGameLife() - getGameLifeInterval())
         gameLife?.text = getGameLife().toString()
-        setGameAnswer("")
-        getGameGrids()?.forEach { disableGameGrid(it) }
+
+        // Reset Game Answer
+        setGameAnswer(getGameAnswerInitial())
     }
 
     fun startGame(
@@ -301,7 +346,7 @@ class GameViewModel : ViewModel() {
                 }
             }
 
-            delay(200)
+            delay(DELAY_BUTTON_CLICK)
 
             view.setBackgroundColor(Color.WHITE)
         }
