@@ -30,6 +30,7 @@
     <!-- Game -->
     <string name="game_title">Memory game</string>
     <string name="game_start_button">Start</string>
+    <string name="game_quit_button">Quit</string>
     <string name="game_tag_00">00</string>
     <string name="game_tag_01">01</string>
     <string name="game_tag_02">02</string>
@@ -72,4 +73,8 @@
     <string name="game_score">0</string>
     <string name="game_timer_title">Timer</string>
     <string name="game_timer">5</string>
+    <string name="game_start_message">Game started!</string>
+    <string name="game_end_message">Game ended!</string>
+    <string name="game_win_message">You got it!</string>
+    <string name="game_lose_message">Not quite!</string>
 </resources>

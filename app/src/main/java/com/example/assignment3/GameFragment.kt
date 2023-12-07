@@ -66,9 +66,19 @@ class GameFragment : Fragment() {
         var gameStartButton = view?.findViewById<Button>(R.id.gameStartButton)
         gameStartButton?.text = viewModel.getStartButtonText()
 
+        // Data Binding for gameQuitButton
+        viewModel.setQuitButtonText(getString(R.string.game_quit_button))
+        var gameQuitButton = view?.findViewById<Button>(R.id.gameQuitButton)
+        gameQuitButton?.text = viewModel.getQuitButtonText()
+
         // SetOnClickListener on gameStartButton
         gameStartButton?.setOnClickListener {
             viewModel.startGame(lifecycleScope, context, view)
+        }
+
+        // SetOnClickListener on gameQuitButton
+        gameQuitButton?.setOnClickListener {
+            viewModel.endGame(context, view)
         }
 
         // Get GridLayout

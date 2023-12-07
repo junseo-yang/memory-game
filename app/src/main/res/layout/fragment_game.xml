@@ -83,15 +83,26 @@
             android:layout_marginTop="50sp"
             android:text="@string/placeholder" />
 
+        <Button
+            android:id="@+id/gameQuitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gameTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50sp"
+            android:text="@string/placeholder"
+            android:visibility="invisible"/>
+
         <GridLayout
             android:id="@+id/gridLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:columnCount="6"
             android:rowCount="6"
-            android:layout_below="@+id/gameStartButton"
+            android:layout_below="@+id/gameTitle"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50sp">
+            android:layout_marginTop="150sp"
+            android:visibility="invisible">
 
             <!-- 0 -->
             <com.google.android.material.button.MaterialButton
