@@ -20,7 +20,7 @@ class GameModel {
     var gameScoreTitle = ""
     var gameScore = 0
     var gameScoreInitial = 0
-    var gameScoreInterval: Int = 10
+    val gameScoreInterval: Int
         get() = (this.gameRound / 3 + 1) * 10
 
     // Game Timer
@@ -29,8 +29,9 @@ class GameModel {
     var gameTimerInitial = 5
 
     // Game Tile Count
-    var gameTileCount = 4
+    var gameTileCount: Int = 4
     var gameTileCountInitial = 4
+    var gameTileCountInterval = 1
 
     // Game Question
     var gameQuestion = ""

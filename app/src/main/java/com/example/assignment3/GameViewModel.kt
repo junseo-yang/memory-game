@@ -3,7 +3,6 @@ package com.example.assignment3
 import android.content.Context
 import android.graphics.Color
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.GridLayout
@@ -21,6 +20,7 @@ class GameViewModel : ViewModel() {
     private val DELAY_BUTTON_CLICK: Long = 100
     private val TIMER_INTERVAL: Long = 1000
     private val TIMER_START_AT: Long = 5000
+    private val STANDARD_GAME_ROUND: Int = 3
     private var gamePlaying = true
     private var gameModel: GameModel = GameModel()
 
@@ -100,6 +100,7 @@ class GameViewModel : ViewModel() {
         return gameModel.gameScoreInterval
     }
 
+    // Game Timer
     fun setGameTimerTitle(title: String) {
         gameModel.gameTimerTitle = title
     }
@@ -120,6 +121,7 @@ class GameViewModel : ViewModel() {
         return gameModel.gameTimerInitial
     }
 
+    // Game Tile Count
     fun setGameTileCount(count: Int) {
         gameModel.gameTileCount = count
     }
@@ -130,6 +132,10 @@ class GameViewModel : ViewModel() {
 
     fun getGameTileCountInitial(): Int {
         return gameModel.gameTileCountInitial
+    }
+
+    fun getGameTileCountInterval(): Int {
+        return gameModel.gameTileCountInterval
     }
 
     // Game Question
@@ -241,6 +247,11 @@ class GameViewModel : ViewModel() {
 
         // Increase Game Round
         setGameRound(getGameRound() + getGameRoundInterval())
+
+        // Increase Game Tile Count
+        if (getGameRound() % STANDARD_GAME_ROUND == ZERO) {
+            setGameTileCount(getGameTileCount() + getGameTileCountInterval())
+        }
 
         // Reset Game Answer
         setGameAnswer(getGameAnswerInitial())
