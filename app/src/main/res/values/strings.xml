@@ -16,7 +16,6 @@
     <!-- Place Holder -->
     <string name="placeholder">Placeholder</string>
 
-
     <!-- Welcome -->
     <string name="welcome_title">Memory game</string>
     <string name="welcome_instruction">How to play
@@ -68,11 +67,8 @@
     <string name="game_tag_54">54</string>
     <string name="game_tag_55">55</string>
     <string name="game_life_title">Life</string>
-    <string name="game_life">3</string>
     <string name="game_score_title">Score</string>
-    <string name="game_score">0</string>
     <string name="game_timer_title">Timer</string>
-    <string name="game_timer">5</string>
     <string name="game_start_message">Game started!</string>
     <string name="game_end_message">Game ended!</string>
     <string name="game_win_message">You got it!</string>
