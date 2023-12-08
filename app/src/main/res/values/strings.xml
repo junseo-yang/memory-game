@@ -25,7 +25,7 @@
         \n3. If the tiles matched, you\'ll earn points!
         \n4. You have 3 chances!</string>
     <string name="welcome_username_hint">Enter your username</string>
-    <string name="welcome_go_button">Let\'s go!</string>
+    <string name="welcome_play_button">Play</string>
 
     <!-- Game -->
     <string name="game_title">Memory game</string>

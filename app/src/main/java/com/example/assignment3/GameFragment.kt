@@ -1,6 +1,7 @@
 package com.example.assignment3
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -98,5 +99,15 @@ class GameFragment : Fragment() {
 
         // Disable Buttons for Initialization
         viewModel.getGameGrids()?.forEach { viewModel.disableGameGrid(it) }
+
+        // Use the Kotlin extension in the fragment-ktx artifact.
+        parentFragmentManager.setFragmentResultListener(
+            "requestKey", this
+        ) { requestKey, bundle ->
+            // We use a String here, but any type that can be put in a Bundle is supported.
+            val result = bundle.getString("bundleKey")
+            // Do something with the result.
+            Log.d("asdf", result.toString())
+        }
     }
 }

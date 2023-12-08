@@ -37,11 +37,11 @@ class WelcomeViewModel : ViewModel() {
         return welcomeModel.username
     }
 
-    fun setGoButtonText(btnGoText: String) {
+    fun setWelcomePlayButtonText(btnGoText: String) {
         welcomeModel.btnGoText = btnGoText
     }
 
-    fun getGoButtonText(): String {
+    fun getWelcomePlayButtonText(): String {
         return welcomeModel.btnGoText
     }
 }
