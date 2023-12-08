@@ -106,8 +106,9 @@ class GameFragment : Fragment() {
         ) { requestKey, bundle ->
             // We use a String here, but any type that can be put in a Bundle is supported.
             val result = bundle.getString("bundleKey")
-            // Do something with the result.
-            Log.d("asdf", result.toString())
+
+            // Set GameUsername in Game Model
+            viewModel.setGameUsername(result.toString())
         }
     }
 }

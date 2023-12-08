@@ -1,6 +1,7 @@
 package com.example.assignment3
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.CountDownTimer
 import android.view.View
@@ -220,6 +221,34 @@ class GameViewModel : ViewModel() {
 
     fun getTimer(): CountDownTimer? {
         return gameModel.timer
+    }
+
+    // Game Username
+    fun setGameUsername(username: String) {
+        gameModel.gameUsername = username
+    }
+
+    fun getGameUsername(): String {
+        return gameModel.gameUsername
+    }
+
+    // Game Shared Preferences
+    // Game Username
+    fun setGameSharedPreferences(sharedPreferences: SharedPreferences?) {
+        gameModel.gameSharedPreferences = sharedPreferences
+    }
+
+    fun getGameSharedPreferences(): SharedPreferences? {
+        return gameModel.gameSharedPreferences
+    }
+
+    // Game High Score Data
+    fun setGameHighScoreData(highScoreData: MutableMap<String, Int>) {
+        gameModel.gameHighScoreData = highScoreData
+    }
+
+    fun getGameHighScoreData(): MutableMap<String, Int>? {
+        return gameModel.gameHighScoreData
     }
 
     fun win(
@@ -447,5 +476,54 @@ class GameViewModel : ViewModel() {
 
         // Set gamePlaying false
         gamePlaying = false
+
+        // Save the score if it's the high score of the user
+        saveHighScore(context)
+    }
+
+    fun saveHighScore(context: Context?) {
+        // Check the user name
+        if (getGameUsername().isNotEmpty()) {
+            // Get High Score Data from Shared Preference
+            setGameSharedPreferences(
+                context!!.getSharedPreferences(
+                    context.getString(R.string.high_score_shared_preference),
+                    Context.MODE_PRIVATE
+                )
+            )
+            var gameSharedPreferencesString = getGameSharedPreferences()?.getString(
+                context.getString(R.string.high_score_shared_preference),
+                ""
+            )!!
+
+            if (gameSharedPreferencesString.isNotEmpty()) {
+                gameSharedPreferencesString = gameSharedPreferencesString.substring(1, gameSharedPreferencesString.length - 1)
+
+                setGameHighScoreData(
+                    gameSharedPreferencesString.split(", ").associate {
+                        val (key, value) = it.split("=")
+                        key to value.toInt()
+                    }.toMutableMap()
+                )
+            }
+            else {
+                setGameHighScoreData(mutableMapOf(getGameUsername() to getGameScore()))
+            }
+
+            // Save the score if the score is the higher/new score
+            if (getGameHighScoreData()?.contains(getGameUsername())!!) {
+                val existingScore = getGameHighScoreData()!![getGameUsername()]
+                if (existingScore!! < getGameScore()) {
+                    getGameHighScoreData()!![getGameUsername()] = getGameScore()
+                }
+            }
+            else {
+                getGameHighScoreData()!![getGameUsername()] = getGameScore()
+            }
+
+            val editor = getGameSharedPreferences()!!.edit()
+            editor.putString(context.getString(R.string.high_score_shared_preference), getGameHighScoreData().toString())
+            editor.commit()
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.assignment3
 
+import android.content.SharedPreferences
 import android.os.CountDownTimer
 import com.google.android.material.button.MaterialButton
 
@@ -50,4 +51,13 @@ class GameModel {
 
     // Timer
     var timer: CountDownTimer? = null
+
+    // Username
+    var gameUsername = ""
+
+    // SharedPreferences
+    var gameSharedPreferences: SharedPreferences? = null
+
+    // Game High Score
+    var gameHighScoreData: MutableMap<String, Int>? = null
 }
