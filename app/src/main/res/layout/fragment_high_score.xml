@@ -9,10 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            android:id="@+id/high_score_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="High Score"
-            android:layout_centerInParent="true" />
+            android:text="@string/high_score_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100sp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/high_score_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:layout_below="@+id/high_score_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10sp" />
     </RelativeLayout>
 
 </FrameLayout>
