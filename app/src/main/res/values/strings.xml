@@ -25,6 +25,7 @@
         \n4. You have 3 chances!</string>
     <string name="welcome_username_hint">Enter your username</string>
     <string name="welcome_play_button">Play</string>
+    <string name="welcome_username_warning">Username is empty. You can\'t record your high score. Are you sure you want to proceed?</string>
 
     <!-- Game -->
     <string name="game_title">Memory game</string>
