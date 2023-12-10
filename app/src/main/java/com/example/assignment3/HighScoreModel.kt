@@ -1,8 +1,19 @@
+/*  HighScoreModel.kt
+    PROG3210 Assignment 3
+
+    Revision History
+        Junseo Yang, 2023-12-10: Created
+ */
+
 package com.example.assignment3
 
 import android.content.Context
 import android.widget.TextView
 
+/**
+ * Class for HighScoreModel
+ * @param fragment HighScoreFragment
+ */
 class HighScoreModel(fragment: HighScoreFragment) {
     // Constants
     private val NUMBER_OF_TOP_SCORES = 3
@@ -24,6 +35,9 @@ class HighScoreModel(fragment: HighScoreFragment) {
     // High Score Data
     private var highScoreData: MutableMap<String, Int> = mutableMapOf()
 
+    /**
+     * Method for getHighScoreDataFromSharedPreferences
+     */
     fun getHighScoreDataFromSharedPreferences() {
         var sharedPreferencesString = sharedPreferences.getString(
             context.getString(R.string.high_score_shared_preference),
@@ -40,6 +54,9 @@ class HighScoreModel(fragment: HighScoreFragment) {
         }
     }
 
+    /**
+     * Method for displayHighScores
+     */
     fun displayHighScores() {
         if (highScoreData.isNotEmpty()) {
             // Sort High Scores

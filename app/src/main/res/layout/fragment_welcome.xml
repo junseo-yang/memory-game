@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_welcome.xml
+    PROG3210 Assignment 3
+
+    Revision History
+        Junseo Yang, 2023-12-10: Created
+-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,15 +23,6 @@
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="100sp" />
-        <TextView
-            android:id="@+id/welcomeInstruction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/welcome_instruction"
-            android:textSize="14sp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/welcomeTitle"
-            android:layout_marginTop="50sp" />
         <EditText
             android:id="@+id/welcomeUsername"
             android:layout_width="wrap_content"
@@ -32,7 +30,7 @@
             android:hint="@string/welcome_username_hint"
             android:textSize="14sp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/welcomeInstruction"
+            android:layout_below="@+id/welcomeTitle"
             android:layout_marginTop="50sp" />
         <Button
             android:id="@+id/welcomePlayButton"
@@ -42,6 +40,15 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/welcomeUsername"
             android:layout_marginTop="50sp"/>
+        <TextView
+            android:id="@+id/welcomeInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_instruction"
+            android:textSize="14sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/welcomePlayButton"
+            android:layout_marginTop="50sp" />
     </RelativeLayout>
 
 </FrameLayout>

@@ -1,3 +1,10 @@
+<!--
+    strings.xml
+    PROG3210 Assignment 3
+
+    Revision History
+        Junseo Yang, 2023-12-10: Created
+-->
 <resources>
     <string name="app_name">Assignment3</string>
 
@@ -18,11 +25,19 @@
 
     <!-- Welcome -->
     <string name="welcome_title">Memory game</string>
-    <string name="welcome_instruction">How to play
+    <string name="welcome_instruction">
+        How to play
         \n1. Enter your name to record high score!
         \n2. Highlight tiles before time\'s up!
         \n3. If the tiles matched, you\'ll earn points!
-        \n4. You have 3 chances!</string>
+        \n4. You have 3 chances!
+        \n
+        \nGame Description
+        \n1. You have 3 lives.
+        \n2. Start with 4 Tiles and 10 points per round.
+        \n3. You should select more tiles per 3 rounds.
+        \n4. You\'ll earn more points per 3 rounds.
+    </string>
     <string name="welcome_username_hint">Enter your username</string>
     <string name="welcome_play_button">Play</string>
     <string name="welcome_username_warning">Username is empty. You can\'t record your high score. Are you sure you want to proceed?</string>

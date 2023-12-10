@@ -1,3 +1,10 @@
+/*  GameModel.kt
+    PROG3210 Assignment 3
+
+    Revision History
+        Junseo Yang, 2023-12-10: Created
+ */
+
 package com.example.assignment3
 
 import android.content.Context
@@ -13,6 +20,10 @@ import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * Class for GameModel
+ * @param fragment GameFragment
+ */
 class GameModel(private var fragment: GameFragment) {
     // Constants
     private val ZERO = 0
@@ -105,7 +116,9 @@ class GameModel(private var fragment: GameFragment) {
     private var gameHighScoreData = mutableMapOf<String, Int>()
 
 
-    // Methods
+    /**
+     * Method for win
+     */
     private fun win() {
         // Disable Button
         disableGameGrids()
@@ -139,6 +152,9 @@ class GameModel(private var fragment: GameFragment) {
         gameAnswer = gameAnswerInitial
     }
 
+    /**
+     * Method for lose
+     */
     private fun lose() {
         // Disable Button
         disableGameGrids()
@@ -164,6 +180,9 @@ class GameModel(private var fragment: GameFragment) {
         gameAnswer = gameAnswerInitial
     }
 
+    /**
+     * Method for disableGameGrids
+     */
     fun disableGameGrids() {
         val gridLayout = view.findViewById<GridLayout>(R.id.gridLayout)
         for (i in ZERO until gridLayout.childCount ) {
@@ -171,6 +190,9 @@ class GameModel(private var fragment: GameFragment) {
         }
     }
 
+    /**
+     * Method for enableGameGrids
+     */
     private fun enableGameGrids() {
         val gridLayout = view.findViewById<GridLayout>(R.id.gridLayout)
         for (i in ZERO until gridLayout.childCount ) {
@@ -178,6 +200,10 @@ class GameModel(private var fragment: GameFragment) {
         }
     }
 
+    /**
+     * Method for getGameGrids
+     * @return MutableList<MaterialButton>
+     */
     private fun getGameGrids(): MutableList<MaterialButton> {
         var list = mutableListOf<MaterialButton>()
 
@@ -189,6 +215,9 @@ class GameModel(private var fragment: GameFragment) {
         return list
     }
 
+    /**
+     * Method for startGame
+     */
     private fun startGame() {
         // Reset Game
         reset()
@@ -247,6 +276,9 @@ class GameModel(private var fragment: GameFragment) {
         }
     }
 
+    /**
+     * Method for saveHighScore
+     */
     private fun saveHighScore() {
         // Check the user name
         if (gameUsername.isNotEmpty()) {
@@ -286,6 +318,9 @@ class GameModel(private var fragment: GameFragment) {
         }
     }
 
+    /**
+     * Method for endGame
+     */
     private fun endGame() {
         // Show Start Button
         gameStartButton.visibility = View.VISIBLE
@@ -313,6 +348,9 @@ class GameModel(private var fragment: GameFragment) {
         saveHighScore()
     }
 
+    /**
+     * Method for reset
+     */
     fun reset() {
         // Game Life
         gameLife = gameLifeInitial
@@ -339,6 +377,9 @@ class GameModel(private var fragment: GameFragment) {
         gameRound = gameRoundInitial
     }
 
+    /**
+     * Method for setOnClickListeners
+     */
     fun setOnClickListeners() {
         // SetOnClickListener GameStartButton
         gameStartButton.setOnClickListener {
@@ -373,6 +414,9 @@ class GameModel(private var fragment: GameFragment) {
         }
     }
 
+    /**
+     * Method for getUsername
+     */
     fun getUsername() {
         parentFragmentManager.setFragmentResultListener(
             REQUEST_KEY, fragment

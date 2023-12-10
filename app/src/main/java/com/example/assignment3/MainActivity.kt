@@ -1,3 +1,10 @@
+/*  MainActivity.kt
+    PROG3210 Assignment 3
+
+    Revision History
+        Junseo Yang, 2023-12-10: Created
+ */
+
 package com.example.assignment3
 
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +14,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 
+/**
+ * Class for MainActivity inherited from AppCompatActivity
+ */
 class MainActivity : AppCompatActivity() {
+    /**
+     * Method that override onCreate method
+     * @param savedInstanceState Bundle?
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,14 +31,17 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainer, WelcomeFragment())
             .commit()
 
+        // View Components
         val topAppBar: MaterialToolbar = findViewById(R.id.topAppBar)
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navigationView: NavigationView = findViewById(R.id.navigationView)
 
-        topAppBar.setNavigationOnClickListener { view ->
+        // SetNavigationOnClickListener
+        topAppBar.setNavigationOnClickListener {
             drawerLayout.open()
         }
 
+        // SetNavigationItemSelectedListener
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.nav_item_welcome -> {

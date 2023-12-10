@@ -1,21 +1,31 @@
+/*  GameFragment.kt
+    PROG3210 Assignment 3
+
+    Revision History
+        Junseo Yang, 2023-12-10: Created
+ */
+
 package com.example.assignment3
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.GridLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.google.android.material.button.MaterialButton
 
+/**
+ * Class for GameFragment inherited from Fragment
+ */
 class GameFragment : Fragment() {
+    // ViewModel
     private lateinit var viewModel: GameViewModel
 
+    /**
+     * Method that override onCreateView method
+     * @param inflater LayoutInflater
+     * @param container ViewGroup?
+     * @param savedInstanceState Bundle?
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +33,10 @@ class GameFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
 
+    /**
+     * Method that override onActivityCreated method
+     * @param savedInstanceState Bundle?
+     */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = GameViewModel(this)
