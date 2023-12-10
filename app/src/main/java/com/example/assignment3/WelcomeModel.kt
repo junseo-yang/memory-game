@@ -1,17 +1,20 @@
 package com.example.assignment3
 
 import android.app.AlertDialog
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import android.widget.TextView
+import android.widget.EditText
 
-class WelcomeModel(fragment: WelcomeFragment) {
+class WelcomeModel(private var fragment: WelcomeFragment) {
     // Constants
     private val REQUEST_KEY = "requestKey"
     private val BUNDLE_KEY = "bundleKey"
     private val NO = "No"
     private val YES = "Yes"
+    private val ZERO = 0
 
     // Common
     private val context = fragment.requireContext()
@@ -19,14 +22,14 @@ class WelcomeModel(fragment: WelcomeFragment) {
     private val parentFragmentManager = fragment.parentFragmentManager
 
     // View Components
-    private val welcomeUsernameTextView: TextView = view.findViewById(R.id.welcomeUsername)
+    private val welcomeUsernameEditText: EditText = view.findViewById(R.id.welcomeUsername)
     private val welcomePlayButton: Button = view.findViewById(R.id.welcomePlayButton)
 
     fun setOnClickListeners() {
         // SetOnClickListener WelcomePlayButton
         welcomePlayButton.setOnClickListener {
             // If username has not been provided, show dialog box
-            if (welcomeUsernameTextView.text.toString().isEmpty()) {
+            if (welcomeUsernameEditText.text.toString().isEmpty()) {
                 // Set DialogInterface.OnClickListener
                 val dialogClickListener =
                     DialogInterface.OnClickListener { dialog, which ->
@@ -54,12 +57,17 @@ class WelcomeModel(fragment: WelcomeFragment) {
                 saveUsernameInBundle()
                 navigateToGameFragment()
             }
+
+            // Hide Keyboard
+            val inputMethodManager =
+                fragment.requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, ZERO)
         }
     }
 
     private fun saveUsernameInBundle() {
         val result = Bundle()
-        result.putString(BUNDLE_KEY, welcomeUsernameTextView.text.toString())
+        result.putString(BUNDLE_KEY, welcomeUsernameEditText.text.toString())
         parentFragmentManager.setFragmentResult(REQUEST_KEY, result)
     }
 
