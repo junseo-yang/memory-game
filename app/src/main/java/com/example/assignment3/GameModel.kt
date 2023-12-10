@@ -120,6 +120,9 @@ class GameModel(private var fragment: GameFragment) {
         // Cancel Timer
         timer.cancel()
 
+        // Reset Timer
+        gameTimer = gameTimerInitial
+
         // Increase Game Score
         gameScore += gameScoreInterval
         gameScoreTextView.text = gameScore.toString()
@@ -149,6 +152,9 @@ class GameModel(private var fragment: GameFragment) {
 
         // Cancel Timer
         timer.cancel()
+
+        // Reset Timer
+        gameTimer = gameTimerInitial
 
         // Decrease Game Life
         gameLife -= gameLifeInterval
