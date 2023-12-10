@@ -6,6 +6,9 @@ import android.widget.TextView
 class HighScoreModel(fragment: HighScoreFragment) {
     // Constants
     private val NUMBER_OF_TOP_SCORES = 3
+    private val DELIMITER_COMMA_SPACE = ", "
+    private val DELIMITER_EQUAL_SIGN = "="
+    private val EMPTY_STRING = ""
 
     // Common
     private val context = fragment.requireContext()
@@ -24,30 +27,28 @@ class HighScoreModel(fragment: HighScoreFragment) {
     fun getHighScoreDataFromSharedPreferences() {
         var sharedPreferencesString = sharedPreferences.getString(
             context.getString(R.string.high_score_shared_preference),
-            ""
-        )!!
+            EMPTY_STRING
+        ).toString()
 
         if (sharedPreferencesString.isNotEmpty()) {
             sharedPreferencesString = sharedPreferencesString.substring(1, sharedPreferencesString.length - 1)
 
-            highScoreData = sharedPreferencesString.split(", ").associate {
-                val (key, value) = it.split("=")
+            highScoreData = sharedPreferencesString.split(DELIMITER_COMMA_SPACE).associate {
+                val (key, value) = it.split(DELIMITER_EQUAL_SIGN)
                 key to value.toInt()
             }.toMutableMap()
         }
     }
 
     fun displayHighScores() {
-        if (highScoreData.isEmpty()) {
-            highScoreDataTextView.text = context.getString(R.string.high_score_empty)
-        } else {
+        if (highScoreData.isNotEmpty()) {
             // Sort High Scores
             val sortedList = highScoreData.toList().sortedByDescending { (_, value) -> value}.take(NUMBER_OF_TOP_SCORES)
 
             // Concatenate High Score Data
-            var output = ""
+            var output = EMPTY_STRING
             for (e in sortedList) {
-                output += "${e.first} | ${e.second}\n"
+                output += "${e.first} | ${e.second}\n\n\n"
             }
 
             // Display High Score Data

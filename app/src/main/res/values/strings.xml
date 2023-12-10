@@ -78,5 +78,5 @@
     <!-- High Score -->
     <string name="high_score_title">Top 3 High Scores</string>
     <string name="high_score_shared_preference">memory_game_high_scores</string>
-    <string name="high_score_empty">There\'s no high score data</string>
+    <string name="high_score_data_default">There\'s no high score data</string>
 </resources>

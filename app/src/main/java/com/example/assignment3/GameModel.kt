@@ -21,6 +21,11 @@ class GameModel(private var fragment: GameFragment) {
     private val DELAY_INITIAL: Long = 1000
     private val DELAY_BUTTON_CLICK: Long = 100
     private val STANDARD_GAME_ROUND: Int = 3
+    private val DELIMITER_COMMA_SPACE = ", "
+    private val DELIMITER_EQUAL_SIGN = "="
+    private val EMPTY_STRING = ""
+    private val REQUEST_KEY = "requestKey"
+    private val BUNDLE_KEY = "bundleKey"
 
     // Common
     private val context = fragment.requireContext()
@@ -205,7 +210,7 @@ class GameModel(private var fragment: GameFragment) {
                 disableGameGrids()
 
                 // Generate Random Question
-                var question = ""
+                var question = EMPTY_STRING
                 for (i in 1..gameTileCount) {
                     var grid = getGameGrids().random()
                     question += grid.tag
@@ -243,14 +248,14 @@ class GameModel(private var fragment: GameFragment) {
 
             var gameSharedPreferencesString = gameSharedPreferences.getString(
                 fragment.getString(R.string.high_score_shared_preference),
-                ""
-            )!!
+                EMPTY_STRING
+            ).toString()
 
             if (gameSharedPreferencesString.isNotEmpty()) {
                 gameSharedPreferencesString = gameSharedPreferencesString.substring(1, gameSharedPreferencesString.length - 1)
 
-                gameHighScoreData = gameSharedPreferencesString.split(", ").associate {
-                    val (key, value) = it.split("=")
+                gameHighScoreData = gameSharedPreferencesString.split(DELIMITER_COMMA_SPACE).associate {
+                    val (key, value) = it.split(DELIMITER_EQUAL_SIGN)
                     key to value.toInt()
                 }.toMutableMap()
             }
@@ -275,7 +280,7 @@ class GameModel(private var fragment: GameFragment) {
         }
     }
 
-    fun endGame() {
+    private fun endGame() {
         // Show Start Button
         gameStartButton.visibility = View.VISIBLE
 
@@ -364,10 +369,10 @@ class GameModel(private var fragment: GameFragment) {
 
     fun getUsername() {
         parentFragmentManager.setFragmentResultListener(
-            "requestKey", fragment
+            REQUEST_KEY, fragment
         ) { requestKey, bundle ->
             // We use a String here, but any type that can be put in a Bundle is supported.
-            val result = bundle.getString("bundleKey")
+            val result = bundle.getString(BUNDLE_KEY)
 
             // Set GameUsername in Game Model
             gameUsername = result.toString()

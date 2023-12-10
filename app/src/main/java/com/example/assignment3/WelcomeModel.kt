@@ -7,6 +7,12 @@ import android.widget.Button
 import android.widget.TextView
 
 class WelcomeModel(fragment: WelcomeFragment) {
+    // Constants
+    private val REQUEST_KEY = "requestKey"
+    private val BUNDLE_KEY = "bundleKey"
+    private val NO = "No"
+    private val YES = "Yes"
+
     // Common
     private val context = fragment.requireContext()
     private val view = fragment.requireView()
@@ -41,8 +47,8 @@ class WelcomeModel(fragment: WelcomeFragment) {
                 // Show Dialog Box
                 AlertDialog.Builder(context)
                     .setMessage(context.getString(R.string.welcome_username_warning))
-                    .setNegativeButton("No", dialogClickListener)
-                    .setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton(NO, dialogClickListener)
+                    .setPositiveButton(YES, dialogClickListener)
                     .show()
             } else {
                 saveUsernameInBundle()
@@ -53,8 +59,8 @@ class WelcomeModel(fragment: WelcomeFragment) {
 
     private fun saveUsernameInBundle() {
         val result = Bundle()
-        result.putString("bundleKey", welcomeUsernameTextView.text.toString())
-        parentFragmentManager.setFragmentResult("requestKey", result)
+        result.putString(BUNDLE_KEY, welcomeUsernameTextView.text.toString())
+        parentFragmentManager.setFragmentResult(REQUEST_KEY, result)
     }
 
     private fun navigateToGameFragment() {
