@@ -16,7 +16,9 @@ import kotlinx.coroutines.launch
 class GameModel(private var fragment: GameFragment) {
     // Constants
     private val ZERO = 0
+    private val ONE = 1
     private val TIMER_START_AT: Long = 5000
+    private val TIMER_MAX: Long = 5100
     private val TIMER_INTERVAL: Long = 1000
     private val DELAY_INITIAL: Long = 1000
     private val DELAY_BUTTON_CLICK: Long = 100
@@ -32,6 +34,10 @@ class GameModel(private var fragment: GameFragment) {
     private val view = fragment.requireView()
     private val lifecycleScope = fragment.lifecycleScope
     private val parentFragmentManager = fragment.parentFragmentManager
+    private val sharedPreferences = context.getSharedPreferences(
+        context.getString(R.string.high_score_shared_preference),
+        Context.MODE_PRIVATE
+    )
 
     // View Components
     private val gameStartButton: Button = view.findViewById(R.id.gameStartButton)
@@ -167,9 +173,6 @@ class GameModel(private var fragment: GameFragment) {
     }
 
     private fun getGameGrids(): MutableList<MaterialButton> {
-        // Get GridLayout
-        val gridLayout = view.findViewById<GridLayout>(R.id.gridLayout)
-
         var list = mutableListOf<MaterialButton>()
 
         // Create List of Buttons
@@ -211,13 +214,14 @@ class GameModel(private var fragment: GameFragment) {
 
                 // Generate Random Question
                 var question = EMPTY_STRING
-                for (i in 1..gameTileCount) {
+                for (i in ONE..gameTileCount) {
                     var grid = getGameGrids().random()
                     question += grid.tag
                     grid.setBackgroundColor(Color.BLACK)
                     delay(1000)
                     grid.setBackgroundColor(Color.WHITE)
                 }
+                // Check the game is still playing
                 if (gamePlaying) {
                     gameQuestion = question
 
@@ -227,7 +231,7 @@ class GameModel(private var fragment: GameFragment) {
                     // Let user play
                     timer.start()
 
-                    delay(5100)
+                    delay(TIMER_MAX)
                 }
             }
 
@@ -241,20 +245,16 @@ class GameModel(private var fragment: GameFragment) {
         // Check the user name
         if (gameUsername.isNotEmpty()) {
             // Get High Score Data from Shared Preference
-            val gameSharedPreferences = fragment.requireContext().getSharedPreferences(
-                fragment.getString(R.string.high_score_shared_preference),
-                Context.MODE_PRIVATE
-            )
-
-            var gameSharedPreferencesString = gameSharedPreferences.getString(
+            var sharedPreferencesString = sharedPreferences.getString(
                 fragment.getString(R.string.high_score_shared_preference),
                 EMPTY_STRING
             ).toString()
 
-            if (gameSharedPreferencesString.isNotEmpty()) {
-                gameSharedPreferencesString = gameSharedPreferencesString.substring(1, gameSharedPreferencesString.length - 1)
+            if (sharedPreferencesString.isNotEmpty()) {
+                // Get rid of "{" and "}" in the first and last
+                sharedPreferencesString = sharedPreferencesString.substring(ONE, sharedPreferencesString.length - ONE)
 
-                gameHighScoreData = gameSharedPreferencesString.split(DELIMITER_COMMA_SPACE).associate {
+                gameHighScoreData = sharedPreferencesString.split(DELIMITER_COMMA_SPACE).associate {
                     val (key, value) = it.split(DELIMITER_EQUAL_SIGN)
                     key to value.toInt()
                 }.toMutableMap()
@@ -274,7 +274,7 @@ class GameModel(private var fragment: GameFragment) {
                 gameHighScoreData[gameUsername] = gameScore
             }
 
-            val editor = gameSharedPreferences.edit()
+            val editor = sharedPreferences.edit()
             editor.putString(fragment.getString(R.string.high_score_shared_preference), gameHighScoreData.toString())
             editor.commit()
         }
