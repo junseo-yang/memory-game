@@ -1,8 +1,6 @@
 package com.example.assignment3
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +19,8 @@ class HighScoreFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = HighScoreViewModel(requireContext(), requireView())
+        viewModel = HighScoreViewModel(this)
 
-        viewModel.displayHighScores()
+        viewModel.readyHighScores()
     }
 }
