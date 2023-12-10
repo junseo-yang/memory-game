@@ -17,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -114,6 +115,9 @@ class GameModel(private var fragment: GameFragment) {
 
     // Game High Score
     private var gameHighScoreData = mutableMapOf<String, Int>()
+
+    // Job
+    private var job: Job? = null
 
 
     /**
@@ -219,31 +223,32 @@ class GameModel(private var fragment: GameFragment) {
      * Method for startGame
      */
     private fun startGame() {
-        // Reset Game
-        reset()
+        // Set job in case it needs to be cancelled
+        job = lifecycleScope.launch {
+            // Reset Game
+            reset()
 
-        // View Components
-        // Hide Start Button
-        gameStartButton.visibility = View.INVISIBLE
-        // Show Quit Button
-        gameQuitButton.visibility = View.VISIBLE
-        // Show gridLayout
-        gridLayout.visibility = View.VISIBLE
+            // View Components
+            // Hide Start Button
+            gameStartButton.visibility = View.INVISIBLE
+            // Show Quit Button
+            gameQuitButton.visibility = View.VISIBLE
+            // Show gridLayout
+            gridLayout.visibility = View.VISIBLE
 
-        // Set gamePlaying true
-        gamePlaying = true
+            // Set gamePlaying true
+            gamePlaying = true
 
-        // Show Toast Message
-        Toast.makeText(
-            context,
-            context.getString(R.string.game_start_message),
-            Toast.LENGTH_SHORT
-        ).show()
+            // Show Toast Message
+            Toast.makeText(
+                context,
+                context.getString(R.string.game_start_message),
+                Toast.LENGTH_SHORT
+            ).show()
 
-        lifecycleScope.launch {
             delay(DELAY_INITIAL)
 
-            while (gameLife > ZERO && gamePlaying) {
+            while ((gameLife > ZERO) && gamePlaying) {
                 // Disable Grids
                 disableGameGrids()
 
@@ -253,7 +258,7 @@ class GameModel(private var fragment: GameFragment) {
                     var grid = getGameGrids().random()
                     question += grid.tag
                     grid.setBackgroundColor(Color.BLACK)
-                    delay(1000)
+                    delay(TIMER_INTERVAL)
                     grid.setBackgroundColor(Color.WHITE)
                 }
                 // Check the game is still playing
@@ -322,6 +327,9 @@ class GameModel(private var fragment: GameFragment) {
      * Method for endGame
      */
     private fun endGame() {
+        // Cancel Job
+        job?.cancel()
+
         // Show Start Button
         gameStartButton.visibility = View.VISIBLE
 
@@ -375,6 +383,9 @@ class GameModel(private var fragment: GameFragment) {
 
         // Reset Game Round
         gameRound = gameRoundInitial
+        
+        // Reset Grid Color
+        getGameGrids().forEach { it.setBackgroundColor(Color.WHITE) }
     }
 
     /**
